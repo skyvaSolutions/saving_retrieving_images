@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
+import 'uploadImage.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,8 +30,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  File? _image;
+  File? image;
   final picker = ImagePicker();
+
 
   Future getImage(bool fromGallery) async {
     final pickedFile;
@@ -44,8 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
+        image = File(pickedFile.path);
+        UploadImage uploadImage = UploadImage();
+        uploadImage.uploadImageFile(image!);
+      }
+      else {
         print('No image chosen');
       }
     });
@@ -63,9 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: _image == null
+                child: image == null
                     ? Text('No image selected')
-                    : Image.file(_image!),
+                    : Image.file(image!),
               ),
             ),
             SizedBox(
