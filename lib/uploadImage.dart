@@ -14,12 +14,12 @@ class UploadImage{
       'image': await MultipartFile.fromFile(imageFile.path,
           filename: fileName,
           contentType: new MediaType('image', 'png')),
-          'type': 'image/png'
+      'type': 'image/png',
+      'email': 'abcd@gmail.com'
     });
 
     Response response = await dio.post(uploadURL, data: formData);
     print("RESPONSE: ${response.statusCode}");
-    print("DATA: ${response.data}");
   }
 }
 

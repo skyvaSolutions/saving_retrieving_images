@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   File? image;
   final picker = ImagePicker();
+  String email = 'abcd@gmail.com';
 
 
   Future getImage(bool fromGallery) async {
@@ -70,6 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: image == null
                     ? Text('No image selected')
                     : Image.file(image!),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Image.network('https://skyva-app.herokuapp.com/user/img/$email'),
               ),
             ),
             SizedBox(
